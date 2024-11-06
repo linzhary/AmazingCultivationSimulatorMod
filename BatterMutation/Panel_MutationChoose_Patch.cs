@@ -13,84 +13,20 @@ using XiaWorld.UI.InGame;
 
 namespace BatterMutation
 {
-    [HarmonyPatch(typeof(Panel_MutationChoose))]
-    public class Panel_MutationChoose_Patch
+    [HarmonyPatch]
+    public class WaitCardSelect_Transpiler
     {
-        protected static readonly FieldInfo _field_Result = typeof(Panel_MutationChoose).GetField("Result", BindingFlags.NonPublic | BindingFlags.Instance);
-        protected static UI_MutationConfirmBtn _cardRedrawBtn;
-        protected static UI_MutationConfirmBtn _groupRedrawBtn;
-
-        [HarmonyPrefix]
-        [HarmonyPatch(MethodType.Constructor)]
-        [HarmonyPatch(new Type[] { typeof(UI_MutationChoosePanel), typeof(Action<MutationSelectResult>) })]
-        public static void On_Constructor_Prefix(
-            Panel_MutationChoose __instance,
-            UI_MutationChoosePanel uiInfo,
-            Action<MutationSelectResult> onFillResult
-            )
+        public static MethodBase TargetMethod()
         {
-            InitCardRedrawBtn(__instance, uiInfo, onFillResult);
-            InitGroupRedrawBtn(__instance, uiInfo, onFillResult);
+            var nestTypes = typeof(Panel_MutationChoose).GetNestedTypes(BindingFlags.NonPublic);
+            var type = typeof(Panel_MutationChoose).GetNestedTypes(BindingFlags.NonPublic)
+                .Where(x => x.Name.StartsWith("<WaitCardSelect>"))
+                .First();
+            var method = type.GetMethod("MoveNext");
+            return method;
         }
 
-        private static void InitCardRedrawBtn(Panel_MutationChoose instance,  UI_MutationChoosePanel uiInfo, Action<MutationSelectResult> onFillResult)
-        {
-            _cardRedrawBtn = UI_MutationConfirmBtn.CreateInstance();
-            uiInfo.AddChild(_cardRedrawBtn);
-            _cardRedrawBtn.SetScale(uiInfo.m_Confirm.scaleX, uiInfo.m_Confirm.scaleY);
-            _cardRedrawBtn.SetPivot(uiInfo.m_Confirm.pivotX, uiInfo.m_Confirm.pivotY, uiInfo.m_Confirm.pivotAsAnchor);
-            _cardRedrawBtn.SetSize(uiInfo.m_Confirm.width, uiInfo.m_Confirm.height);
-            _cardRedrawBtn.onClick.Set(new EventCallback0(() =>
-            {
-                var result = new MutationRedrawResult();
-                _field_Result.SetValue(instance, result);
-                onFillResult?.Invoke(result);
-            }));
-            _cardRedrawBtn.visible = false;
-            _cardRedrawBtn.alpha = 0f;
-            _cardRedrawBtn.grayed = false;
-            _cardRedrawBtn.text = "重抽";
-        }
-
-        private static void InitGroupRedrawBtn(Panel_MutationChoose instance, UI_MutationChoosePanel uiInfo, Action<MutationSelectResult> onFillResult)
-        {
-            _groupRedrawBtn = UI_MutationConfirmBtn.CreateInstance();
-            uiInfo.AddChild(_groupRedrawBtn);
-            _groupRedrawBtn.SetScale(uiInfo.m_ConfirmGroup.scaleX, uiInfo.m_ConfirmGroup.scaleY);
-            _groupRedrawBtn.SetPivot(uiInfo.m_ConfirmGroup.pivotX, uiInfo.m_ConfirmGroup.pivotY, uiInfo.m_ConfirmGroup.pivotAsAnchor);
-            _groupRedrawBtn.SetSize(uiInfo.m_ConfirmGroup.width, uiInfo.m_ConfirmGroup.height);
-            _groupRedrawBtn.onClick.Set(new EventCallback0(() =>
-            {
-                var result = new MutationRedrawResult();
-                _field_Result.SetValue(instance, result);
-                onFillResult?.Invoke(result);
-            }));
-            _groupRedrawBtn.visible = false;
-            _groupRedrawBtn.alpha = 0f;
-            _groupRedrawBtn.grayed = false;
-            _groupRedrawBtn.text = "重抽";
-        }
-
-
-        [HarmonyPostfix]
-        [HarmonyPatch("ResetAnimUI")]
-        public static void On_ResetAnimUI_Postfix()
-        {
-            if (_cardRedrawBtn != null)
-            {
-                _cardRedrawBtn.visible = false;
-                _cardRedrawBtn.alpha = 0f;
-            }
-            if (_groupRedrawBtn != null)
-            {
-                _groupRedrawBtn.visible = false;
-                _groupRedrawBtn.alpha = 0f;
-            }
-        }
-
-        [HarmonyTranspiler]
-        [HarmonyPatch("WaitCardSelect", MethodType.Enumerator)]
-        public static IEnumerable<CodeInstruction> On_WaitCardSelect_Transpiler(IEnumerable<CodeInstruction> instructions)
+        public static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
         {
             var codes = instructions.ToList();
 
@@ -132,24 +68,24 @@ namespace BatterMutation
 
             return codes;
         }
+    }
 
-        public static void ShowCardRedrawBtn()
+    [HarmonyPatch]
+    public class WaitGroupSelect_Transpiler
+    {
+        public static MethodBase TargetMethod()
         {
-            var UIInfo = Wnd_MutationMain.Instance.UIInfo.m_n8;
-            if (_cardRedrawBtn != null)
-            {
-                _cardRedrawBtn.SetXY(UIInfo.m_Confirm.x, UIInfo.m_Confirm.y + UIInfo.m_Confirm.height / 1.5f);
-                _cardRedrawBtn.visible = true;
-                _cardRedrawBtn.alpha = 1f;
-            }
+            var nestTypes = typeof(Panel_MutationChoose).GetNestedTypes(BindingFlags.NonPublic);
+            var type = typeof(Panel_MutationChoose).GetNestedTypes(BindingFlags.NonPublic)
+                .Where(x => x.Name.StartsWith("<WaitCardSelect>"))
+                .First();
+            var method = type.GetMethod("MoveNext");
+            return method;
         }
-        [HarmonyTranspiler]
-        [HarmonyPatch("WaitGroupSelect", MethodType.Enumerator)]
-
-        public static IEnumerable<CodeInstruction> On_WaitGroupSelect_Transpiler(IEnumerable<CodeInstruction> instructions)
+        
+        public static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
         {
             var codes = instructions.ToList();
-
             var foundCreateFunc = false;
             var insertIndex = -1;
             for (var i = 0; i < codes.Count; i++)
@@ -188,15 +124,78 @@ namespace BatterMutation
 
             return codes;
         }
+    }
 
-        public static void ShowGroupRedrawBtn()
+    [HarmonyPatch(typeof(Panel_MutationChoose))]
+    public class Panel_MutationChoose_Patch
+    {
+        protected static readonly FieldInfo _field_Result = typeof(Panel_MutationChoose).GetField("Result", BindingFlags.NonPublic | BindingFlags.Instance);
+        protected static UI_MutationConfirmBtn _cardRedrawBtn;
+        protected static UI_MutationConfirmBtn _groupRedrawBtn;
+
+        [HarmonyPrefix]
+        [HarmonyPatch(MethodType.Constructor)]
+        [HarmonyPatch(new Type[] { typeof(UI_MutationChoosePanel), typeof(Action<MutationSelectResult>) })]
+        public static void On_Constructor_Prefix(
+            Panel_MutationChoose __instance,
+            UI_MutationChoosePanel uiInfo,
+            Action<MutationSelectResult> onFillResult
+            )
         {
-            var UIInfo = Wnd_MutationMain.Instance.UIInfo.m_n8;
+            InitCardRedrawBtn(__instance, uiInfo, onFillResult);
+            InitGroupRedrawBtn(__instance, uiInfo, onFillResult);
+        }
+
+        private static void InitCardRedrawBtn(Panel_MutationChoose instance,  UI_MutationChoosePanel uiInfo, Action<MutationSelectResult> onFillResult)
+        {
+            _cardRedrawBtn = UI_MutationConfirmBtn.CreateInstance();
+            uiInfo.AddChild(_cardRedrawBtn);
+            _cardRedrawBtn.SetScale(uiInfo.m_Confirm.scaleX, uiInfo.m_Confirm.scaleY);
+            _cardRedrawBtn.SetPivot(uiInfo.m_Confirm.pivotX, uiInfo.m_Confirm.pivotY, uiInfo.m_Confirm.pivotAsAnchor);
+            _cardRedrawBtn.SetSize(uiInfo.m_Confirm.width, uiInfo.m_Confirm.height);
+            _cardRedrawBtn.onClick.Set(new EventCallback0(() =>
+            {
+                var result = new MutationRedrawResult();
+                _field_Result.SetValue(instance, result);
+                onFillResult?.Invoke(result);
+            }));
+            _cardRedrawBtn.visible = false;
+            _cardRedrawBtn.alpha = 0f;
+            _cardRedrawBtn.grayed = false;
+            _cardRedrawBtn.text = "重抽";
+        }
+        private static void InitGroupRedrawBtn(Panel_MutationChoose instance, UI_MutationChoosePanel uiInfo, Action<MutationSelectResult> onFillResult)
+        {
+            _groupRedrawBtn = UI_MutationConfirmBtn.CreateInstance();
+            uiInfo.AddChild(_groupRedrawBtn);
+            _groupRedrawBtn.SetScale(uiInfo.m_ConfirmGroup.scaleX, uiInfo.m_ConfirmGroup.scaleY);
+            _groupRedrawBtn.SetPivot(uiInfo.m_ConfirmGroup.pivotX, uiInfo.m_ConfirmGroup.pivotY, uiInfo.m_ConfirmGroup.pivotAsAnchor);
+            _groupRedrawBtn.SetSize(uiInfo.m_ConfirmGroup.width, uiInfo.m_ConfirmGroup.height);
+            _groupRedrawBtn.onClick.Set(new EventCallback0(() =>
+            {
+                var result = new MutationRedrawResult();
+                _field_Result.SetValue(instance, result);
+                onFillResult?.Invoke(result);
+            }));
+            _groupRedrawBtn.visible = false;
+            _groupRedrawBtn.alpha = 0f;
+            _groupRedrawBtn.grayed = false;
+            _groupRedrawBtn.text = "重抽";
+        }
+
+        [HarmonyPostfix]
+        [HarmonyPatch("ResetAnimUI")]
+        public static void On_ResetAnimUI_Postfix()
+        {
+            if (_cardRedrawBtn != null)
+            {
+                _cardRedrawBtn.visible = false;
+                _cardRedrawBtn.alpha = 0f;
+            }
             if (_groupRedrawBtn != null)
             {
-                _groupRedrawBtn.SetXY(UIInfo.m_ConfirmGroup.x, UIInfo.m_ConfirmGroup.y + UIInfo.m_ConfirmGroup.height);
-                _groupRedrawBtn.visible = true;
-                _groupRedrawBtn.alpha = 1f;
+                _groupRedrawBtn.visible = false;
+                _groupRedrawBtn.alpha = 0f;
             }
         }
 
@@ -208,6 +207,26 @@ namespace BatterMutation
             {
                 _groupRedrawBtn.visible = false;
                 _groupRedrawBtn.alpha = 0f;
+            }
+        }
+        public static void ShowCardRedrawBtn()
+        {
+            var UIInfo = Wnd_MutationMain.Instance.UIInfo.m_n8;
+            if (_cardRedrawBtn != null)
+            {
+                _cardRedrawBtn.SetXY(UIInfo.m_Confirm.x, UIInfo.m_Confirm.y + UIInfo.m_Confirm.height / 1.5f);
+                _cardRedrawBtn.visible = true;
+                _cardRedrawBtn.alpha = 1f;
+            }
+        }
+        public static void ShowGroupRedrawBtn()
+        {
+            var UIInfo = Wnd_MutationMain.Instance.UIInfo.m_n8;
+            if (_groupRedrawBtn != null)
+            {
+                _groupRedrawBtn.SetXY(UIInfo.m_ConfirmGroup.x, UIInfo.m_ConfirmGroup.y + UIInfo.m_ConfirmGroup.height);
+                _groupRedrawBtn.visible = true;
+                _groupRedrawBtn.alpha = 1f;
             }
         }
     }

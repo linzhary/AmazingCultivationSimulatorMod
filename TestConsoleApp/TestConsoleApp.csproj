@@ -57,5 +57,11 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BatterMutation\BatterMutation.csproj">
+      <Project>{b034e9e1-1e34-4ca6-bff6-cc15f5c696eb}</Project>
+      <Name>BatterMutation</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
