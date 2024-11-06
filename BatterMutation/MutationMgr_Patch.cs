@@ -33,7 +33,7 @@ namespace BatterMutation
             KLog.Dbg($"{nameof(selectResult)},Length {selectResult.SafeLength()}");
             foreach (var result in selectResult)
             {
-                if (result is MutationReGenerateResult
+                if (result is MutationRedrawResult
                     && result.Data.TriggerTypes.SafeLength() > 0)
                 {
                     KLog.Dbg($"重新抽卡");

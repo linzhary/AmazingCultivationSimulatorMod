@@ -6,7 +6,7 @@ using XiaWorld;
 
 namespace BatterMutation
 {
-    public class MutationReGenerateResult : MutationSelectResult
+    public class MutationRedrawResult : MutationSelectResult
     {
     }
 }
