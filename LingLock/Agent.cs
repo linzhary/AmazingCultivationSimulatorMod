@@ -6,16 +6,13 @@ using XiaWorld;
 
 namespace LingLock
 {
-	// Token: 0x02000002 RID: 2
 	public class Agent
 	{
-		// Token: 0x06000001 RID: 1 RVA: 0x00002050 File Offset: 0x00000250
 		public void Enter()
 		{
 			EventMgr.Instance.RegisterEvent(g_emEvent.SelectBuilding, new EventMgr.EventHandler(this.SelectBuilding));
 		}
 
-		// Token: 0x06000002 RID: 2 RVA: 0x0000206C File Offset: 0x0000026C
 		public void SelectBuilding(Thing thing, object[] objs)
 		{
 			if (thing == null)
@@ -28,7 +25,6 @@ namespace LingLock
 			}
 		}
 
-		// Token: 0x06000003 RID: 3 RVA: 0x000020D0 File Offset: 0x000002D0
 		public void SwitchLockButton(Thing thing, bool locked = true)
 		{
 			thing.RemoveBtnData("锁灵");
@@ -41,7 +37,6 @@ namespace LingLock
 			thing.AddBtnData("锁灵", "", "GameMain:GetMod('LingLock'):Lock(bind)", "打开锁灵效果", null);
 		}
 
-		// Token: 0x06000004 RID: 4 RVA: 0x00002130 File Offset: 0x00000330
 		public void SwitchLockState(Thing thing, bool locked = true)
 		{
 			LockItem lockItem = this._lockArray.FirstOrDefault((LockItem r) => r.Key == thing.Key);
@@ -56,7 +51,6 @@ namespace LingLock
 			this.SwitchLockButton(thing, locked);
 		}
 
-		// Token: 0x06000005 RID: 5 RVA: 0x000021A4 File Offset: 0x000003A4
 		public void Step()
 		{
 			World instance = World.Instance;
@@ -85,7 +79,7 @@ namespace LingLock
 								{
 									int key = enumerator2.Current;
 									GridManagerEx<LingMapData.LQData> gdm2 = map.GDM;
-                                    LingMapData.LQData lqdata2 = gdm2?.GetGridData(key, null);
+									LingMapData.LQData lqdata2 = gdm2?.GetGridData(key, null);
 									if (lqdata2 != null)
 									{
 										lqdata2.Value = map.Effect.GetEffect(key, g_emMapEffectKind.LingAddion, 0f, true) + lqdata.Value * 2f / 3f;
@@ -117,16 +111,14 @@ namespace LingLock
 			}
 		}
 
-		// Token: 0x06000006 RID: 6 RVA: 0x00002420 File Offset: 0x00000620
 		public string Save()
 		{
 			KLog.Dbg("锁灵法座数据存档", new object[0]);
 			return JsonConvert.SerializeObject(from r in this._lockArray
-			where r.State > LockState.UnLock
-			select r);
+											   where r.State > LockState.UnLock
+											   select r);
 		}
 
-		// Token: 0x06000007 RID: 7 RVA: 0x0000246C File Offset: 0x0000066C
 		public void Load(string json)
 		{
 			KLog.Dbg("锁灵法座数据读档", new object[0]);
@@ -137,14 +129,12 @@ namespace LingLock
 			}
 		}
 
-		// Token: 0x04000001 RID: 1
 		private static readonly string[] _additionalBuildings = new string[]
 		{
 			"Building_MagicCushion",
 			"Building_LianFaTan"
 		};
 
-		// Token: 0x04000002 RID: 2
 		private readonly List<LockItem> _lockArray = new List<LockItem>();
 	}
 }

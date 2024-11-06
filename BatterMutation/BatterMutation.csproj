@@ -32,29 +32,23 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="0Harmony">
-      <HintPath>..\..\..\Program Files (x86)\Steam\steamapps\workshop\content\955900\1997170546\0Harmony.dll</HintPath>
+      <HintPath>..\Library\0Harmony.dll</HintPath>
     </Reference>
     <Reference Include="Assembly-CSharp">
-      <HintPath>..\..\..\Program Files (x86)\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\Assembly-CSharp.dll</HintPath>
+      <HintPath>..\Library\Assembly-CSharp.dll</HintPath>
     </Reference>
     <Reference Include="Assembly-CSharp-firstpass">
-      <HintPath>..\..\..\Program Files (x86)\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\Assembly-CSharp-firstpass.dll</HintPath>
+      <HintPath>..\Library\Assembly-CSharp-firstpass.dll</HintPath>
     </Reference>
     <Reference Include="ModLoaderLite">
-      <HintPath>..\..\..\Program Files (x86)\Steam\steamapps\workshop\content\955900\1997170546\ModLoaderLite.dll</HintPath>
+      <HintPath>..\Library\ModLoaderLite.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Program Files (x86)\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\Library\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
     <Reference Include="UnityEngine.CoreModule">
-      <HintPath>..\..\..\Program Files (x86)\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
+      <HintPath>..\Library\UnityEngine.CoreModule.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
