@@ -1,0 +1,182 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{46C925CC-56FB-4855-8FDE-33EF7EB8B5B6}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>LingLock</RootNamespace>
+    <AssemblyName>LingLock</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Assembly-CSharp">
+      <HintPath>D:\Program Files (x86)\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\Assembly-CSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Assembly-CSharp-firstpass">
+      <HintPath>D:\Program Files (x86)\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\Assembly-CSharp-firstpass.dll</HintPath>
+    </Reference>
+    <Reference Include="Assembly-UnityScript">
+      <HintPath>D:\Program Files (x86)\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\Assembly-UnityScript.dll</HintPath>
+    </Reference>
+    <Reference Include="Boo.Lang">
+      <HintPath>D:\Program Files (x86)\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\Boo.Lang.dll</HintPath>
+    </Reference>
+    <Reference Include="CSharpCode">
+      <HintPath>D:\Program Files (x86)\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\CSharpCode.dll</HintPath>
+    </Reference>
+    <Reference Include="DOTween">
+      <HintPath>D:\Program Files (x86)\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\DOTween.dll</HintPath>
+    </Reference>
+    <Reference Include="DOTween43">
+      <HintPath>D:\Program Files (x86)\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\DOTween43.dll</HintPath>
+    </Reference>
+    <Reference Include="DOTween46">
+      <HintPath>D:\Program Files (x86)\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\DOTween46.dll</HintPath>
+    </Reference>
+    <Reference Include="DOTween50">
+      <HintPath>D:\Program Files (x86)\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\DOTween50.dll</HintPath>
+    </Reference>
+    <Reference Include="GalaxyCSharp">
+      <HintPath>D:\Program Files (x86)\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\GalaxyCSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>D:\Program Files (x86)\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Data.Tds">
+      <HintPath>D:\Program Files (x86)\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\Mono.Data.Tds.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Posix">
+      <HintPath>D:\Program Files (x86)\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\Mono.Posix.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Security">
+      <HintPath>D:\Program Files (x86)\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\Mono.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>D:\Program Files (x86)\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Core" />
+    <Reference Include="UnityEngine">
+      <HintPath>D:\Program Files (x86)\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\UnityEngine.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Agent.cs" />
+    <Compile Include="LockItem.cs" />
+    <Compile Include="LockState.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="D:\Program Files %28x86%29\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\Assembly-CSharp-firstpass.dll" />
+    <Analyzer Include="D:\Program Files %28x86%29\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\Assembly-CSharp.dll" />
+    <Analyzer Include="D:\Program Files %28x86%29\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\Assembly-UnityScript.dll" />
+    <Analyzer Include="D:\Program Files %28x86%29\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\Boo.Lang.dll" />
+    <Analyzer Include="D:\Program Files %28x86%29\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\CSharpCode.dll" />
+    <Analyzer Include="D:\Program Files %28x86%29\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\DOTween.dll" />
+    <Analyzer Include="D:\Program Files %28x86%29\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\DOTween43.dll" />
+    <Analyzer Include="D:\Program Files %28x86%29\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\DOTween46.dll" />
+    <Analyzer Include="D:\Program Files %28x86%29\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\DOTween50.dll" />
+    <Analyzer Include="D:\Program Files %28x86%29\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\GalaxyCSharp.dll" />
+    <Analyzer Include="D:\Program Files %28x86%29\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\ICSharpCode.SharpZipLib.dll" />
+    <Analyzer Include="D:\Program Files %28x86%29\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\Mono.Data.Tds.dll" />
+    <Analyzer Include="D:\Program Files %28x86%29\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\Mono.Posix.dll" />
+    <Analyzer Include="D:\Program Files %28x86%29\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\Mono.Security.dll" />
+    <Analyzer Include="D:\Program Files %28x86%29\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\mscorlib.dll" />
+    <Analyzer Include="D:\Program Files %28x86%29\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\Newtonsoft.Json.dll" />
+    <Analyzer Include="D:\Program Files %28x86%29\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\System.Configuration.dll" />
+    <Analyzer Include="D:\Program Files %28x86%29\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\System.Core.dll" />
+    <Analyzer Include="D:\Program Files %28x86%29\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\System.Data.dll" />
+    <Analyzer Include="D:\Program Files %28x86%29\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\System.dll" />
+    <Analyzer Include="D:\Program Files %28x86%29\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\System.EnterpriseServices.dll" />
+    <Analyzer Include="D:\Program Files %28x86%29\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\System.Runtime.Serialization.dll" />
+    <Analyzer Include="D:\Program Files %28x86%29\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\System.Security.dll" />
+    <Analyzer Include="D:\Program Files %28x86%29\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\System.Transactions.dll" />
+    <Analyzer Include="D:\Program Files %28x86%29\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\System.Xml.dll" />
+    <Analyzer Include="D:\Program Files %28x86%29\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\System.Xml.Linq.dll" />
+    <Analyzer Include="D:\Program Files %28x86%29\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\Unity.Cloud.BugReporting.Client.dll" />
+    <Analyzer Include="D:\Program Files %28x86%29\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\Unity.Cloud.BugReporting.Plugin.dll" />
+    <Analyzer Include="D:\Program Files %28x86%29\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\Unity.Cloud.UserReporting.Client.dll" />
+    <Analyzer Include="D:\Program Files %28x86%29\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\Unity.Cloud.UserReporting.Plugin.dll" />
+    <Analyzer Include="D:\Program Files %28x86%29\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\Unity.Postprocessing.Runtime.dll" />
+    <Analyzer Include="D:\Program Files %28x86%29\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\UnityEngine.AccessibilityModule.dll" />
+    <Analyzer Include="D:\Program Files %28x86%29\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\UnityEngine.AIModule.dll" />
+    <Analyzer Include="D:\Program Files %28x86%29\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\UnityEngine.Analytics.dll" />
+    <Analyzer Include="D:\Program Files %28x86%29\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\UnityEngine.AnimationModule.dll" />
+    <Analyzer Include="D:\Program Files %28x86%29\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\UnityEngine.ARModule.dll" />
+    <Analyzer Include="D:\Program Files %28x86%29\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\UnityEngine.AssetBundleModule.dll" />
+    <Analyzer Include="D:\Program Files %28x86%29\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\UnityEngine.AudioModule.dll" />
+    <Analyzer Include="D:\Program Files %28x86%29\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\UnityEngine.ClothModule.dll" />
+    <Analyzer Include="D:\Program Files %28x86%29\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\UnityEngine.ClusterInputModule.dll" />
+    <Analyzer Include="D:\Program Files %28x86%29\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\UnityEngine.ClusterRendererModule.dll" />
+    <Analyzer Include="D:\Program Files %28x86%29\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\UnityEngine.CoreModule.dll" />
+    <Analyzer Include="D:\Program Files %28x86%29\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\UnityEngine.CrashReportingModule.dll" />
+    <Analyzer Include="D:\Program Files %28x86%29\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\UnityEngine.DirectorModule.dll" />
+    <Analyzer Include="D:\Program Files %28x86%29\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\UnityEngine.dll" />
+    <Analyzer Include="D:\Program Files %28x86%29\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\UnityEngine.GameCenterModule.dll" />
+    <Analyzer Include="D:\Program Files %28x86%29\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\UnityEngine.GridModule.dll" />
+    <Analyzer Include="D:\Program Files %28x86%29\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\UnityEngine.ImageConversionModule.dll" />
+    <Analyzer Include="D:\Program Files %28x86%29\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\UnityEngine.IMGUIModule.dll" />
+    <Analyzer Include="D:\Program Files %28x86%29\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\UnityEngine.InputModule.dll" />
+    <Analyzer Include="D:\Program Files %28x86%29\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\UnityEngine.JSONSerializeModule.dll" />
+    <Analyzer Include="D:\Program Files %28x86%29\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\UnityEngine.Networking.dll" />
+    <Analyzer Include="D:\Program Files %28x86%29\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\UnityEngine.ParticlesLegacyModule.dll" />
+    <Analyzer Include="D:\Program Files %28x86%29\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\UnityEngine.ParticleSystemModule.dll" />
+    <Analyzer Include="D:\Program Files %28x86%29\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\UnityEngine.PerformanceReportingModule.dll" />
+    <Analyzer Include="D:\Program Files %28x86%29\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\UnityEngine.PerformanceTesting.dll" />
+    <Analyzer Include="D:\Program Files %28x86%29\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\UnityEngine.Physics2DModule.dll" />
+    <Analyzer Include="D:\Program Files %28x86%29\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\UnityEngine.PhysicsModule.dll" />
+    <Analyzer Include="D:\Program Files %28x86%29\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\UnityEngine.ScreenCaptureModule.dll" />
+    <Analyzer Include="D:\Program Files %28x86%29\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\UnityEngine.SharedInternalsModule.dll" />
+    <Analyzer Include="D:\Program Files %28x86%29\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\UnityEngine.SpatialTracking.dll" />
+    <Analyzer Include="D:\Program Files %28x86%29\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\UnityEngine.SpriteMaskModule.dll" />
+    <Analyzer Include="D:\Program Files %28x86%29\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\UnityEngine.SpriteShapeModule.dll" />
+    <Analyzer Include="D:\Program Files %28x86%29\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\UnityEngine.StandardEvents.dll" />
+    <Analyzer Include="D:\Program Files %28x86%29\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\UnityEngine.StyleSheetsModule.dll" />
+    <Analyzer Include="D:\Program Files %28x86%29\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\UnityEngine.TerrainModule.dll" />
+    <Analyzer Include="D:\Program Files %28x86%29\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\UnityEngine.TerrainPhysicsModule.dll" />
+    <Analyzer Include="D:\Program Files %28x86%29\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\UnityEngine.TextRenderingModule.dll" />
+    <Analyzer Include="D:\Program Files %28x86%29\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\UnityEngine.TilemapModule.dll" />
+    <Analyzer Include="D:\Program Files %28x86%29\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\UnityEngine.Timeline.dll" />
+    <Analyzer Include="D:\Program Files %28x86%29\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\UnityEngine.UI.dll" />
+    <Analyzer Include="D:\Program Files %28x86%29\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\UnityEngine.UIElementsModule.dll" />
+    <Analyzer Include="D:\Program Files %28x86%29\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\UnityEngine.UIModule.dll" />
+    <Analyzer Include="D:\Program Files %28x86%29\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\UnityEngine.UNETModule.dll" />
+    <Analyzer Include="D:\Program Files %28x86%29\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\UnityEngine.UnityAnalyticsModule.dll" />
+    <Analyzer Include="D:\Program Files %28x86%29\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\UnityEngine.UnityConnectModule.dll" />
+    <Analyzer Include="D:\Program Files %28x86%29\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\UnityEngine.UnityWebRequestAudioModule.dll" />
+    <Analyzer Include="D:\Program Files %28x86%29\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\UnityEngine.UnityWebRequestModule.dll" />
+    <Analyzer Include="D:\Program Files %28x86%29\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\UnityEngine.UnityWebRequestTextureModule.dll" />
+    <Analyzer Include="D:\Program Files %28x86%29\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\UnityEngine.UnityWebRequestWWWModule.dll" />
+    <Analyzer Include="D:\Program Files %28x86%29\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\UnityEngine.VehiclesModule.dll" />
+    <Analyzer Include="D:\Program Files %28x86%29\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\UnityEngine.VideoModule.dll" />
+    <Analyzer Include="D:\Program Files %28x86%29\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\UnityEngine.VRModule.dll" />
+    <Analyzer Include="D:\Program Files %28x86%29\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\UnityEngine.WebModule.dll" />
+    <Analyzer Include="D:\Program Files %28x86%29\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\UnityEngine.WindModule.dll" />
+    <Analyzer Include="D:\Program Files %28x86%29\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\UWAWrapper_Windows.dll" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
