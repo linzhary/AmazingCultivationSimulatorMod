@@ -55,7 +55,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="HarmonyUtils.cs" />
     <Compile Include="MutationMgr_Patch.cs" />
     <Compile Include="MutationRedrawResult.cs" />
     <Compile Include="Panel_MutationResult_Patch.cs" />
