@@ -3,6 +3,7 @@ using HarmonyLib;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
@@ -98,30 +99,7 @@ namespace BatterMutation
         }
 
         [HarmonyTranspiler]
-        [HarmonyPatch("WaitCardSelect")]
-        public static IEnumerable<CodeInstruction> On_WaitCardSelect_Transpiler(IEnumerable<CodeInstruction> instructions)
-        {
-            var constructorInfo = instructions.ElementAt(0).operand as ConstructorInfo;
-            HarmonyUtils.Instance.Patch(
-                constructorInfo.DeclaringType.GetMethod("MoveNext"),
-                transpiler: new HarmonyMethod(typeof(Panel_MutationChoose_Patch), nameof(Apply_WaitCardSelect_Patch))
-                );
-            return instructions;
-        }
-
-
-        [HarmonyTranspiler]
-        [HarmonyPatch("WaitGroupSelect")]
-        public static IEnumerable<CodeInstruction> On_WaitGroupSelect_Transpiler(IEnumerable<CodeInstruction> instructions)
-        {
-            var constructorInfo = instructions.ElementAt(0).operand as ConstructorInfo;
-            HarmonyUtils.Instance.Patch(
-                constructorInfo.DeclaringType.GetMethod("MoveNext"),
-                transpiler: new HarmonyMethod(typeof(Panel_MutationChoose_Patch), nameof(Apply_WaitGroupSelect_Patch))
-                );
-            return instructions;
-        }
-
+        [HarmonyPatch("WaitCardSelect", MethodType.Enumerator)]
         public static IEnumerable<CodeInstruction> Apply_WaitCardSelect_Patch(IEnumerable<CodeInstruction> instructions)
         {
             var codes = instructions.ToList();
@@ -165,6 +143,8 @@ namespace BatterMutation
             return codes;
         }
 
+        [HarmonyTranspiler]
+        [HarmonyPatch("WaitGroupSelect", MethodType.Enumerator)]
         public static IEnumerable<CodeInstruction> Apply_WaitGroupSelect_Patch(IEnumerable<CodeInstruction> instructions)
         {
             var codes = instructions.ToList();
