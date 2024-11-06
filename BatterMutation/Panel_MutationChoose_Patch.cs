@@ -13,119 +13,6 @@ using XiaWorld.UI.InGame;
 
 namespace BatterMutation
 {
-    [HarmonyPatch]
-    public class WaitCardSelect_Transpiler
-    {
-        public static MethodBase TargetMethod()
-        {
-            var nestTypes = typeof(Panel_MutationChoose).GetNestedTypes(BindingFlags.NonPublic);
-            var type = typeof(Panel_MutationChoose).GetNestedTypes(BindingFlags.NonPublic)
-                .Where(x => x.Name.StartsWith("<WaitCardSelect>"))
-                .First();
-            var method = type.GetMethod("MoveNext");
-            return method;
-        }
-
-        public static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
-        {
-            var codes = instructions.ToList();
-
-            var foundCreateFunc = false;
-            var insertIndex = -1;
-            for (var i = 0; i < codes.Count; i++)
-            {
-                var code = codes[i];
-
-                if (foundCreateFunc == true)
-                {
-                    if (code.opcode == OpCodes.Newobj
-                        && code.operand is ConstructorInfo constructorInfo
-                        && constructorInfo.DeclaringType.Name == typeof(WaitUntil).Name)
-                    {
-                        insertIndex = i - 3;
-                        break;
-                    }
-                    foundCreateFunc = false;
-                }
-
-                if (!foundCreateFunc)
-                {
-                    if (code.opcode == OpCodes.Newobj
-                        && code.operand is ConstructorInfo constructorInfo
-                        && constructorInfo.DeclaringType.Name == typeof(Func<>).Name)
-                    {
-                        foundCreateFunc = true;
-                    }
-                }
-            }
-
-            if (insertIndex > -1)
-            {
-                codes.InsertRange(insertIndex, new List<CodeInstruction> {
-                    new CodeInstruction(OpCodes.Call, typeof(Panel_MutationChoose_Patch).GetMethod("ShowCardRedrawBtn", BindingFlags.Static | BindingFlags.Public)),
-                });
-            }
-
-            return codes;
-        }
-    }
-
-    [HarmonyPatch]
-    public class WaitGroupSelect_Transpiler
-    {
-        public static MethodBase TargetMethod()
-        {
-            var nestTypes = typeof(Panel_MutationChoose).GetNestedTypes(BindingFlags.NonPublic);
-            var type = typeof(Panel_MutationChoose).GetNestedTypes(BindingFlags.NonPublic)
-                .Where(x => x.Name.StartsWith("<WaitCardSelect>"))
-                .First();
-            var method = type.GetMethod("MoveNext");
-            return method;
-        }
-        
-        public static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
-        {
-            var codes = instructions.ToList();
-            var foundCreateFunc = false;
-            var insertIndex = -1;
-            for (var i = 0; i < codes.Count; i++)
-            {
-                var code = codes[i];
-
-                if (foundCreateFunc == true)
-                {
-                    if (code.opcode == OpCodes.Newobj
-                        && code.operand is ConstructorInfo constructorInfo
-                        && constructorInfo.DeclaringType.Name == typeof(WaitUntil).Name)
-                    {
-                        insertIndex = i - 3;
-                        break;
-                    }
-                    foundCreateFunc = false;
-                }
-
-                if (!foundCreateFunc)
-                {
-                    if (code.opcode == OpCodes.Newobj
-                        && code.operand is ConstructorInfo constructorInfo
-                        && constructorInfo.DeclaringType.Name == typeof(Func<>).Name)
-                    {
-                        foundCreateFunc = true;
-                    }
-                }
-            }
-
-            if (insertIndex > -1)
-            {
-                codes.InsertRange(insertIndex, new List<CodeInstruction> {
-                    new CodeInstruction(OpCodes.Call, typeof(Panel_MutationChoose_Patch).GetMethod("ShowGroupRedrawBtn", BindingFlags.Static | BindingFlags.Public)),
-                });
-            }
-
-            return codes;
-        }
-    }
-
     [HarmonyPatch(typeof(Panel_MutationChoose))]
     public class Panel_MutationChoose_Patch
     {
@@ -209,6 +96,117 @@ namespace BatterMutation
                 _groupRedrawBtn.alpha = 0f;
             }
         }
+
+        [HarmonyTranspiler]
+        [HarmonyPatch("WaitCardSelect")]
+        public static IEnumerable<CodeInstruction> On_WaitCardSelect_Transpiler(IEnumerable<CodeInstruction> instructions)
+        {
+            var constructorInfo = instructions.ElementAt(0).operand as ConstructorInfo;
+            HarmonyUtils.Instance.Patch(
+                constructorInfo.DeclaringType.GetMethod("MoveNext"),
+                transpiler: new HarmonyMethod(typeof(Panel_MutationChoose_Patch), nameof(Apply_WaitCardSelect_Patch))
+                );
+            return instructions;
+        }
+
+
+        [HarmonyTranspiler]
+        [HarmonyPatch("WaitGroupSelect")]
+        public static IEnumerable<CodeInstruction> On_WaitGroupSelect_Transpiler(IEnumerable<CodeInstruction> instructions)
+        {
+            var constructorInfo = instructions.ElementAt(0).operand as ConstructorInfo;
+            HarmonyUtils.Instance.Patch(
+                constructorInfo.DeclaringType.GetMethod("MoveNext"),
+                transpiler: new HarmonyMethod(typeof(Panel_MutationChoose_Patch), nameof(Apply_WaitGroupSelect_Patch))
+                );
+            return instructions;
+        }
+
+        public static IEnumerable<CodeInstruction> Apply_WaitCardSelect_Patch(IEnumerable<CodeInstruction> instructions)
+        {
+            var codes = instructions.ToList();
+
+            var foundCreateFunc = false;
+            var insertIndex = -1;
+            for (var i = 0; i < codes.Count; i++)
+            {
+                var code = codes[i];
+
+                if (foundCreateFunc == true)
+                {
+                    if (code.opcode == OpCodes.Newobj
+                        && code.operand is ConstructorInfo constructorInfo
+                        && constructorInfo.DeclaringType.Name == typeof(WaitUntil).Name)
+                    {
+                        insertIndex = i - 3;
+                        break;
+                    }
+                    foundCreateFunc = false;
+                }
+
+                if (!foundCreateFunc)
+                {
+                    if (code.opcode == OpCodes.Newobj
+                        && code.operand is ConstructorInfo constructorInfo
+                        && constructorInfo.DeclaringType.Name == typeof(Func<>).Name)
+                    {
+                        foundCreateFunc = true;
+                    }
+                }
+            }
+
+            if (insertIndex > -1)
+            {
+                codes.InsertRange(insertIndex, new List<CodeInstruction> {
+                    new CodeInstruction(OpCodes.Call, typeof(Panel_MutationChoose_Patch).GetMethod("ShowCardRedrawBtn", BindingFlags.Static | BindingFlags.Public)),
+                });
+            }
+
+            return codes;
+        }
+
+        public static IEnumerable<CodeInstruction> Apply_WaitGroupSelect_Patch(IEnumerable<CodeInstruction> instructions)
+        {
+            var codes = instructions.ToList();
+            var foundCreateFunc = false;
+            var insertIndex = -1;
+            for (var i = 0; i < codes.Count; i++)
+            {
+                var code = codes[i];
+
+                if (foundCreateFunc == true)
+                {
+                    if (code.opcode == OpCodes.Newobj
+                        && code.operand is ConstructorInfo constructorInfo
+                        && constructorInfo.DeclaringType.Name == typeof(WaitUntil).Name)
+                    {
+                        insertIndex = i - 3;
+                        break;
+                    }
+                    foundCreateFunc = false;
+                }
+
+                if (!foundCreateFunc)
+                {
+                    if (code.opcode == OpCodes.Newobj
+                        && code.operand is ConstructorInfo constructorInfo
+                        && constructorInfo.DeclaringType.Name == typeof(Func<>).Name)
+                    {
+                        foundCreateFunc = true;
+                    }
+                }
+            }
+
+            if (insertIndex > -1)
+            {
+                codes.InsertRange(insertIndex, new List<CodeInstruction> {
+                    new CodeInstruction(OpCodes.Call, typeof(Panel_MutationChoose_Patch).GetMethod("ShowGroupRedrawBtn", BindingFlags.Static | BindingFlags.Public)),
+                });
+            }
+
+            return codes;
+        }
+
         public static void ShowCardRedrawBtn()
         {
             var UIInfo = Wnd_MutationMain.Instance.UIInfo.m_n8;
