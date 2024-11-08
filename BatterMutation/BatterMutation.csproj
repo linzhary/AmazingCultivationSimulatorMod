@@ -59,7 +59,6 @@
     <Compile Include="MutationMgr_Patch.cs" />
     <Compile Include="MutationRedrawResult.cs" />
     <Compile Include="Panel_MutationResult_Patch.cs" />
-    <Compile Include="Wnd_MutationMain_Patch.cs" />
     <Compile Include="Panel_MutationChoose_Patch.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

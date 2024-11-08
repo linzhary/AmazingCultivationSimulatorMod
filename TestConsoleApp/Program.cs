@@ -16,7 +16,7 @@ namespace TestConsoleApp
         {
             Assembly.LoadFrom("Assembly-CSharp.dll");
             var harmony = new Harmony("linzhary");
-            harmony.PatchAll(typeof(HarmonyUtils).Assembly);
+            //harmony.PatchAll(typeof(HarmonyUtils).Assembly);
             Console.ReadKey();
         }
     }
