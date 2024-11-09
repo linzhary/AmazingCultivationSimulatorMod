@@ -56,6 +56,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BatterMutation.cs" />
     <Compile Include="MutationMgr_Patch.cs" />
     <Compile Include="MutationRedrawResult.cs" />
     <Compile Include="Panel_MutationResult_Patch.cs" />

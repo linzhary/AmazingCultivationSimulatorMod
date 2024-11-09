@@ -20,6 +20,9 @@ namespace BatterMutation
         protected static UI_MutationConfirmBtn _groupRedrawBtn;
         protected static int _groupRedrawBtnUsedTime = 0;
 
+        // Token: 0x04000001 RID: 1
+        public static bool LimitEnabled = true;
+
         [HarmonyPrefix]
         [HarmonyPatch(MethodType.Constructor)]
         [HarmonyPatch(new Type[] { typeof(UI_MutationChoosePanel), typeof(Action<MutationSelectResult>) })]
@@ -58,7 +61,14 @@ namespace BatterMutation
                 }
                 else
                 {
-                    _cardRedrawBtnUsedTime++;
+                    if (LimitEnabled)
+                    {
+                        _cardRedrawBtnUsedTime++;
+                    }
+                    else
+                    {
+                        _cardRedrawBtnUsedTime = 0;
+                    }
                     var result = new MutationRedrawResult();
                     _field_Result.SetValue(instance, result);
                     onFillResult?.Invoke(result);
@@ -83,7 +93,14 @@ namespace BatterMutation
                 }
                 else
                 {
-                    _groupRedrawBtnUsedTime++;
+                    if (LimitEnabled)
+                    {
+                        _groupRedrawBtnUsedTime++;
+                    }
+                    else
+                    {
+                        _groupRedrawBtnUsedTime = 0;
+                    }
                     var result = new MutationRedrawResult();
                     _field_Result.SetValue(instance, result);
                     onFillResult?.Invoke(result);
@@ -215,8 +232,12 @@ namespace BatterMutation
             if (_cardRedrawBtn != null)
             {
                 _cardRedrawBtn.SetXY(UIInfo.m_Confirm.x, UIInfo.m_Confirm.y + UIInfo.m_Confirm.height / 1.5f);
-                _cardRedrawBtn.text = $"重抽({3 - _cardRedrawBtnUsedTime})";
-                _cardRedrawBtn.grayed = _cardRedrawBtnUsedTime == 3;
+                _cardRedrawBtn.text = "重抽";
+                if (LimitEnabled)
+                {
+                    _cardRedrawBtn.text = $"重抽({3 - _cardRedrawBtnUsedTime})";
+                    _cardRedrawBtn.grayed = _cardRedrawBtnUsedTime == 3;
+                }
                 _cardRedrawBtn.visible = true;
                 _cardRedrawBtn.alpha = 1f;
             }
@@ -227,8 +248,12 @@ namespace BatterMutation
             if (_groupRedrawBtn != null)
             {
                 _groupRedrawBtn.SetXY(UIInfo.m_ConfirmGroup.x, UIInfo.m_ConfirmGroup.y + UIInfo.m_ConfirmGroup.height);
-                _groupRedrawBtn.text = $"重抽({3 - _groupRedrawBtnUsedTime})";
-                _groupRedrawBtn.grayed = _groupRedrawBtnUsedTime == 3;
+                _groupRedrawBtn.text = "重抽";
+                if (LimitEnabled)
+                {
+                    _groupRedrawBtn.text = $"重抽({3 - _groupRedrawBtnUsedTime})";
+                    _groupRedrawBtn.grayed = _groupRedrawBtnUsedTime == 3;
+                }
                 _groupRedrawBtn.visible = true;
                 _groupRedrawBtn.alpha = 1f;
             }
