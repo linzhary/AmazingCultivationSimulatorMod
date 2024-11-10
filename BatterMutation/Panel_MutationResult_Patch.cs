@@ -31,16 +31,16 @@ namespace BatterMutation
 
         private static IEnumerator GetEnumerator(Panel_MutationResult instance, MutationData data)
         {
-            Method_OpenPanel.Invoke(Wnd_MutationMain.Instance, new object[] { g_emMutationPanel.Choose });
             var selectResults = Field_SelectResults.GetValue(Wnd_MutationMain.Instance) as List<MutationSelectResult>;
             selectResults.RemoveAt(selectResults.Count - 1);
-            var newData = RedrawTriggerData(data);
-            yield return Panel_MutationChoose_Patch.Instance.Run(newData);
+            Method_OpenPanel.Invoke(Wnd_MutationMain.Instance, new object[] { g_emMutationPanel.Choose });
+            RedrawTriggerData(data);
+            yield return Panel_MutationChoose_Patch.Instance.Run(data);
             Method_OpenPanel.Invoke(Wnd_MutationMain.Instance, new object[] { g_emMutationPanel.Result });
-            yield return instance.Run(newData, selectResults[selectResults.Count - 1]);
+            yield return instance.Run(data, selectResults[selectResults.Count - 1]);
         }
 
-        private static MutationData RedrawTriggerData(MutationData data)
+        private static void RedrawTriggerData(MutationData data)
         {
             var recordData = Field_RecordData.GetValue(MutationMgr.Instance) as MutataionRecordData;
             var type = data.TriggerTypes[0];
@@ -53,7 +53,14 @@ namespace BatterMutation
                     data.Extent,
                     data.Type
             }) as MutationData;
-            return newData;
+            data.TriggerTypes = newData.TriggerTypes;
+            data.Extent = newData.Extent;
+            data.Type = newData.Type;
+            data.Seed = newData.Seed;
+            data.MinLevel = newData.MinLevel;
+            data.MaxLevel = newData.MaxLevel;
+            data.Conditions = newData.Conditions;
+            data.lstEffects = newData.lstEffects;
         }
     }
 }
