@@ -1,9 +1,12 @@
-﻿using HarmonyLib;
+﻿using GSQ;
+using HarmonyLib;
+using Newtonsoft.Json;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
+using System.Security.Cryptography;
 using XiaWorld;
 
 namespace BatterMutation
@@ -47,20 +50,29 @@ namespace BatterMutation
             var extentDef = MutationMgr.m_MutationExtentDefLoader.GetDef(data.Extent);
             var typeDef = MutationMgr.m_MutationTypeDefLoader.GetDef(data.Type);
             recordData.AddRecord(type, extentDef, typeDef);
+            int totalTriggerCount = recordData.GetTriggerRecord(type).TotalTriggerCount;
+            int seed = World.Instance.GlobleSeed + (int)type * 3125 + totalTriggerCount;
+            World.SetRander(GMathUtl.RandomType.emMutation, new GRandom((uint)seed));
             var newData = Method_RandomMutationData.Invoke(MutationMgr.Instance, new object[]
             {
-                    data.TriggerTypes[0],
+                    type,
                     data.Extent,
                     data.Type
             }) as MutationData;
-            data.TriggerTypes = newData.TriggerTypes;
-            data.Extent = newData.Extent;
-            data.Type = newData.Type;
-            data.Seed = newData.Seed;
-            data.MinLevel = newData.MinLevel;
-            data.MaxLevel = newData.MaxLevel;
-            data.Conditions = newData.Conditions;
-            data.lstEffects = newData.lstEffects;
+            newData.Desc = data.Desc;
+            World.SetRander(GMathUtl.RandomType.emMutation, null);
+            CopyFieldValues(newData, data);
+        }
+
+        private static void CopyFieldValues<T>(T source,T target)
+        {
+            var type = typeof(T);
+            var fields = type.GetFields(BindingFlags.Instance | BindingFlags.Public);
+            foreach (var field in fields)
+            {
+                var sourceVal = field.GetValue(source);
+                field.SetValue(target, sourceVal);
+            }
         }
     }
 }
