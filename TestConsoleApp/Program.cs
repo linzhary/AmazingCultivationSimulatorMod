@@ -1,16 +1,17 @@
 ﻿using HarmonyLib;
+using LingWall;
 using System;
 using System.Reflection;
 
 namespace TestConsoleApp
 {
-    internal class Program
+    public class Program
     {
         static void Main(string[] args)
         {
             Assembly.LoadFrom("Assembly-CSharp.dll");
             var harmony = new Harmony("linzhary");
-            //harmony.PatchAll(typeof(HarmonyUtils).Assembly);
+            harmony.PatchAll(typeof(LingMapData_Patch).Assembly);
             Console.ReadKey();
         }
     }
