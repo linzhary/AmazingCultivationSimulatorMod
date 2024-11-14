@@ -58,7 +58,7 @@ namespace LingWall
                 var gridData = __instance.m_cLQ.GetGridData(dkey, null);
                 if (gridData != null)
                 {
-                    gridData.Value = 0;
+                    gridData.Value = 1;
                 }
                 return false;
             }
