@@ -68,11 +68,18 @@
     <Reference Include="Assembly-CSharp">
       <HintPath>..\..\..\Program Files (x86)\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\Assembly-CSharp.dll</HintPath>
     </Reference>
+    <Reference Include="Assembly-CSharp-firstpass">
+      <HintPath>..\..\..\Program Files (x86)\Steam\steamapps\common\AmazingCultivationSimulator\Amazing Cultivation Simulator_Data\Managed\Assembly-CSharp-firstpass.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BatterMutation\BatterMutation.csproj">
+      <Project>{B034E9E1-1E34-4CA6-BFF6-CC15F5C696EB}</Project>
+      <Name>BatterMutation</Name>
+    </ProjectReference>
     <ProjectReference Include="..\LingWall\LingWall.csproj">
       <Project>{D716920E-6B95-44DE-B023-948F94F3EDFC}</Project>
       <Name>LingWall</Name>

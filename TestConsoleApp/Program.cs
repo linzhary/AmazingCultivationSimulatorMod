@@ -1,4 +1,5 @@
-﻿using HarmonyLib;
+﻿using BatterMutation;
+using HarmonyLib;
 using LingWall;
 using System;
 using System.Reflection;
@@ -10,8 +11,9 @@ namespace TestConsoleApp
         static void Main(string[] args)
         {
             Assembly.LoadFrom("Assembly-CSharp.dll");
+            Assembly.LoadFrom("Assembly-CSharp-firstpass.dll");
             var harmony = new Harmony("linzhary");
-            harmony.PatchAll(typeof(LingMapData_Patch).Assembly);
+            harmony.PatchAll(typeof(BatterMutation.BatterMutation).Assembly);
             Console.ReadKey();
         }
     }

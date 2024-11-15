@@ -35,6 +35,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="BatterMutation.cs" />
+    <Compile Include="GMathUtl_Patch.cs" />
     <Compile Include="MutationMgr_Partch.cs" />
     <Compile Include="MutationRedrawResult.cs" />
     <Compile Include="Panel_MutationResult_Patch.cs" />
