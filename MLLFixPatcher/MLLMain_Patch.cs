@@ -51,13 +51,13 @@ namespace MLLFixPatcher
                         }
                     }
                 }
-                KLog.Dbg("[ModLoaderLite] loading config...", new object[0]);
-                Configuration.Load();
                 KLog.Dbg("[ModLoaderLite] calling OnLoad methods for each mod...", new object[0]);
                 foreach (Assembly asm in ___assemblies)
                 {
                     Util.Call(asm, "OnLoad");
                 }
+                KLog.Dbg("[ModLoaderLite] loading config...", new object[0]);
+                Configuration.Load();
             }
             catch (Exception ex)
             {
@@ -68,6 +68,33 @@ namespace MLLFixPatcher
             {
                 ___saves.Clear();
             }
+            return false;
+        }
+
+        internal static Dictionary<string, object> saves;
+        internal static JsonSerializer serializer;
+        [HarmonyPrefix]
+        [HarmonyPatch("Save")]
+        public static bool On_Save_Prefix(
+             Dictionary<string, object> ___saves,
+             JsonSerializer ___serializer,
+             List<Assembly> ___assemblies)
+        {
+            try
+            {
+                Configuration.Save();
+                foreach (Assembly asm in ___assemblies)
+                {
+                    Util.Call(asm, "OnSave");
+                }
+            }
+            catch (Exception ex)
+            {
+                KLog.Dbg("[ModLoaderLite] Failed to save. Reason: " + ex.Message, new object[0]);
+                KLog.Dbg(ex.StackTrace, new object[0]);
+            }
+            saves = ___saves;
+            serializer = ___serializer;
             return false;
         }
     }
