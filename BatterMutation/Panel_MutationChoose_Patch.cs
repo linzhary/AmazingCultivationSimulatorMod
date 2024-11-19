@@ -148,16 +148,16 @@ namespace BatterMutation
             }
         }
 
-        [HarmonyPrefix]
-        [HarmonyPatch("OnClickRandom")]
-        public static void On_OnClickRandom_Prefix()
-        {
-            if (GroupRedrawBtn != null)
-            {
-                GroupRedrawBtn.visible = false;
-                GroupRedrawBtn.alpha = 0f;
-            }
-        }
+        //[HarmonyPrefix]
+        //[HarmonyPatch("OnClickRandom")]
+        //public static void On_OnClickRandom_Prefix()
+        //{
+        //    if (GroupRedrawBtn != null)
+        //    {
+        //        GroupRedrawBtn.visible = false;
+        //        GroupRedrawBtn.alpha = 0f;
+        //    }
+        //}
 
         [HarmonyTranspiler]
         [HarmonyPatch("WaitCardSelect", MethodType.Enumerator)]
